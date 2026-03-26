@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Work — lekker.design</title>
+  <meta name="description" content="Live demos and portfolio work from lekker.design. Web design for Hong Kong clinics, property agents, and service businesses.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Our Work — lekker.design">
+  <meta property="og:description" content="Live demos and portfolio work from lekker.design. Web design for Hong Kong clinics, property agents, and service businesses.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lekker.design/portfolio">
+  <meta property="og:locale" content="en_HK">
+  <meta property="og:locale:alternate" content="zh_HK">
+  <meta property="og:image" content="https://lekker.design/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="canonical" href="https://lekker.design/portfolio">
+
+  <!-- Favicon: orange // on cream -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='2' fill='%23FFFDF0'/><text x='3' y='24' font-family='monospace' font-weight='bold' font-size='22' fill='%23FF5722'>//</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <style>
+    /* ==========================================================
+       LEKKER.DESIGN — NEO BRUTALIST DESIGN SYSTEM
+       Shared base from index.html (self-contained duplicate)
+       ========================================================== */
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: var(--accent);
+      color: var(--surface);
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      z-index: 9999;
+      border: 2px solid var(--text);
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    :root {
+      --bg:          #FFFDF0;
+      --surface:     #FFFFFF;
+      --text:        #1A1A1A;
+      --text-muted:  #666666;
+      --accent:      #FF5722;
+      --border:      #1A1A1A;
+      --dark:        #1A1A1A;
+      --dark-text:   #FFFDF0;
+      --code-bg:     #F5F5F0;
+
+      --shadow:      4px 4px 0px #1A1A1A;
+      --shadow-hover:6px 6px 0px #1A1A1A;
+      --shadow-sm:   3px 3px 0px #1A1A1A;
+      --shadow-lg:   6px 6px 0px #1A1A1A;
+
+      --font-mono:   'Space Mono', 'PingFang HK', 'Microsoft JhengHei', monospace;
+      --font-sans:   'Space Grotesk', 'PingFang HK', 'Microsoft JhengHei', sans-serif;
+
+      --nav-h:       64px;
+    }
+
+    /* ---- Reset ---- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent); color: var(--surface); }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ---- Typography ---- */
+    h1, h2, h3, h4 {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    /* ---- Layout ---- */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 3rem);
+    }
+
+    section { padding: 6rem 0; }
+
+    .section-dark {
+      background: var(--dark);
+      color: var(--dark-text);
+    }
+
+    .section-marker {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    hr {
+      border: none;
+      height: 3px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ---- Brutalist Card ---- */
+    .card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* ---- Buttons ---- */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1.75rem;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ---- Logo ---- */
+    .logo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .slash {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ---- Tag Pill ---- */
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.65rem;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ---- Bilingual: hide inactive language ---- */
+    [data-zh] { display: none; }
+
+    body.zh [data-en] { display: none; }
+    body.zh [data-zh] { display: inline; }
+    body.zh span[data-zh],
+    body.zh p[data-zh],
+    body.zh h1 [data-zh],
+    body.zh h2 [data-zh],
+    body.zh h3 [data-zh],
+    body.zh div[data-zh],
+    body.zh label[data-zh],
+    body.zh a[data-zh],
+    body.zh small[data-zh],
+    body.zh li[data-zh] { display: inline; }
+
+    p[data-en], p[data-zh],
+    div[data-en], div[data-zh],
+    label[data-en], label[data-zh],
+    li[data-en], li[data-zh] { display: block; }
+
+    body.zh p[data-en],
+    body.zh div[data-en],
+    body.zh label[data-en],
+    body.zh li[data-en] { display: none; }
+
+    body.zh p[data-zh],
+    body.zh div[data-zh],
+    body.zh label[data-zh],
+    body.zh li[data-zh] { display: block; }
+
+    /* ================================================================
+       NAV (shared with index.html)
+       ================================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 3px solid var(--border);
+      height: var(--nav-h);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.nav-active { color: var(--accent); }
+
+    .mobile-menu .nav-active,
+    .mobile-menu a.nav-active {
+      color: var(--accent);
+    }
+
+    .lang-toggle {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: none;
+      border: 2px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+
+    .lang-toggle .lang-en { color: var(--accent); }
+    .lang-toggle .lang-zh { color: var(--text-muted); }
+
+    body.zh .lang-toggle .lang-en { color: var(--text-muted); }
+    body.zh .lang-toggle .lang-zh { color: var(--accent); }
+
+    .nav-cta {
+      font-size: 0.75rem !important;
+      padding: 0.5rem 1rem;
+      background: var(--accent);
+      color: var(--text) !important;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .nav-cta:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .hamburger svg { display: block; }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--bg);
+      border-bottom: 3px solid var(--border);
+      z-index: 999;
+      padding: 0;
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu a,
+    .mobile-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-bottom: 2px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      min-height: 52px;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu button:hover { background: var(--accent); }
+
+    .mobile-menu .nav-cta-mobile {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    /* ================================================================
+       PORTFOLIO HERO
+       ================================================================ */
+    .port-hero {
+      padding-top: calc(var(--nav-h) + 4rem);
+      padding-bottom: 3rem;
+    }
+
+    .port-hero h1 {
+      margin: 0.75rem 0 1rem;
+    }
+
+    .port-hero .desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    /* ---- Filter Pills ---- */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-pill {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.45rem 1rem;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+      min-height: 36px;
+    }
+
+    .filter-pill:hover {
+      background: var(--bg);
+    }
+
+    .filter-pill.active {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    /* ================================================================
+       PROJECT SECTIONS
+       ================================================================ */
+    #projectsContainer {
+      padding-bottom: 2rem;
+    }
+
+    /* ---- Featured Project ---- */
+    .project-featured {
+      padding: 4rem 0;
+      border-bottom: 3px solid var(--border);
+    }
+
+    .project-featured:first-child {
+      border-top: 3px solid var(--border);
+    }
+
+    .pf-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pf-number {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .pf-meta {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .pf-category {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      border: 2px solid var(--border);
+      background: var(--surface);
+    }
+
+    .pf-year {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .pf-title {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      margin-bottom: 0.25rem;
+    }
+
+    .pf-title-zh {
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .pf-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ---- Iframe Wrapper ---- */
+    .iframe-wrapper {
+      margin-bottom: 2rem;
+    }
+
+    .iframe-container {
+      width: 100%;
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      background: var(--code-bg);
+      position: relative;
+      overflow: hidden;
+      transition: height 0.3s ease;
+    }
+
+    .iframe-container iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      display: block;
+      background: #fff;
+    }
+
+    .iframe-container.mobile-view {
+      max-width: 405px;
+      margin: 0 auto;
+      border-radius: 2px;
+      border: 6px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      padding-top: 24px;
+      padding-bottom: 24px;
+      background: var(--dark);
+    }
+
+    .iframe-container.mobile-view iframe {
+      height: 667px;
+      border-radius: 0;
+    }
+
+    /* Iframe error fallback */
+    .iframe-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+      background: var(--code-bg);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .iframe-fallback-text {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .iframe-fallback a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .iframe-loading {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--code-bg);
+      z-index: 2;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .iframe-loading.loaded {
+      opacity: 0;
+    }
+
+    .loading-text {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      animation: loadingPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes loadingPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .iframe-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 0;
+      flex-wrap: wrap;
+    }
+
+    .device-btn {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.85rem;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .device-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .device-btn:hover:not(.active) {
+      background: var(--bg);
+    }
+
+    .view-full {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      transition: opacity 0.15s;
+    }
+
+    .view-full:hover { opacity: 0.7; }
+
+    /* ---- Project Description & Tags ---- */
+    .pf-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .pf-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ---- Before/After Slider (clip-path based) ---- */
+    .ba-section {
+      margin: 2rem 0;
+    }
+
+    .ba-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .ba-slider {
+      position: relative;
+      width: 100%;
+      max-height: 400px;
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      cursor: ew-resize;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .ba-before {
+      position: relative;
+      width: 100%;
+    }
+
+    .ba-before img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .ba-after {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .ba-after img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ba-handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      cursor: ew-resize;
+      z-index: 5;
+      transform: translateX(-50%);
+    }
+
+    .ba-handle-grip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border: 3px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      z-index: 6;
+    }
+
+    .ba-label-tag {
+      position: absolute;
+      top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.6rem;
+      z-index: 4;
+    }
+
+    .ba-label-before {
+      left: 1rem;
+      background: var(--dark);
+      color: var(--dark-text);
+    }
+
+    .ba-label-after {
+      right: 1rem;
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    /* ---- Compact (Non-Featured) Project Card ---- */
+    .project-compact {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      margin-bottom: 1.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .project-compact:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .pc-thumb {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-right: 2px solid var(--border);
+    }
+
+    .pc-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .pc-thumb:hover img {
+      transform: scale(1.03);
+    }
+
+    .pc-thumb-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26, 26, 26, 0);
+      transition: background 0.2s;
+    }
+
+    .pc-thumb:hover .pc-thumb-overlay {
+      background: rgba(26, 26, 26, 0.6);
+    }
+
+    .pc-thumb-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--dark-text);
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--dark-text);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.2s;
+    }
+
+    .pc-thumb:hover .pc-thumb-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pc-body {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pc-number {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .pc-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .pc-title-zh {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .pc-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .pc-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .pc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .pc-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pc-expand-btn {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .pc-expand-btn:hover {
+      background: var(--accent);
+    }
+
+    .pc-view-link {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .pc-view-link:hover { opacity: 0.7; }
+
+    /* Expanded iframe in compact card */
+    .pc-iframe-expand {
+      grid-column: 1 / -1;
+      border-top: 2px solid var(--border);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+
+    .pc-iframe-expand.open {
+      max-height: 750px;
+    }
+
+    .pc-iframe-expand .iframe-wrapper {
+      padding: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .pc-iframe-expand .iframe-container {
+      box-shadow: none;
+    }
+
+    /* ================================================================
+       CTA SECTION
+       ================================================================ */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 0;
+    }
+
+    .cta-section h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-section .desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ================================================================
+       FOOTER (shared with index.html)
+       ================================================================ */
+    footer {
+      background: var(--dark);
+      color: var(--dark-text);
+      padding: 3rem 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .footer-grid .logo .slash { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--dark-text);
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+
+    .footer-links a:hover { opacity: 1; }
+
+    .footer-info { text-align: right; }
+
+    .footer-info p {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 253, 240, 0.15);
+      padding: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ================================================================
+       WHATSAPP FLOATING BUTTON (shared)
+       ================================================================ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 900;
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .whatsapp-float:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .whatsapp-float svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
+    @media (max-width: 1024px) {
+      .project-compact {
+        grid-template-columns: 280px 1fr;
+      }
+
+      .iframe-container iframe {
+        height: 500px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+
+      .project-compact {
+        grid-template-columns: 1fr;
+      }
+
+      .pc-thumb {
+        border-right: none;
+        border-bottom: 2px solid var(--border);
+        max-height: 220px;
+      }
+
+      .iframe-container iframe {
+        height: 400px;
+      }
+
+      .iframe-container.mobile-view iframe {
+        height: 550px;
+      }
+
+      .card,
+      .project-compact {
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card:hover,
+      .project-compact:hover {
+        box-shadow: var(--shadow);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .footer-info { text-align: left; }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+
+      .whatsapp-float {
+        bottom: 1rem;
+        right: 1rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 4rem 0; }
+
+      .project-featured { padding: 3rem 0; }
+
+      .filters {
+        gap: 0.35rem;
+      }
+
+      .filter-pill {
+        font-size: 0.6rem;
+        padding: 0.35rem 0.7rem;
+      }
+    }
+
+    /* ================================================================
+       GSAP ANIMATION SUPPORT
+       ================================================================ */
+
+    /* Brutalist active state — tactile push */
+    .btn:active,
+    .nav-cta:active {
+      transform: translate(0, 0) !important;
+      box-shadow: 2px 2px 0px #1A1A1A !important;
+    }
+
+    .card:active,
+    .project-compact:active,
+    .filter-pill:active {
+      transform: translate(0, 0) !important;
+      box-shadow: 2px 2px 0px #1A1A1A !important;
+    }
+
+    /* Nav link hover flash */
+    @keyframes nav-flash {
+      0% { background-color: rgba(255, 87, 34, 0.25); }
+      100% { background-color: transparent; }
+    }
+
+    .nav-links > a:not(.nav-cta):hover {
+      animation: nav-flash 0.2s ease;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ============================================================
+       NAV
+       ============================================================ -->
+  <nav>
+    <div class="container">
+      <a href="/" class="logo">
+        <span class="slash">//</span> lekker<span class="slash">/</span>design
+      </a>
+
+      <div class="nav-links">
+        <a href="/portfolio" class="nav-active"><span class="slash">//</span> <span data-en>work</span><span data-zh>作品</span></a>
+        <a href="/#about"><span class="slash">//</span> <span data-en>about</span><span data-zh>關於</span></a>
+        <a href="/#contact"><span class="slash">//</span> <span data-en>contact</span><span data-zh>聯絡</span></a>
+        <button class="lang-toggle" onclick="toggleLang()" aria-label="Toggle language">
+          <span class="lang-en">EN</span> / <span class="lang-zh">中文</span>
+        </button>
+        <a href="/#contact" class="nav-cta">
+          <span data-en>GET A FREE AUDIT</span><span data-zh>免費網站審核</span>
+        </a>
+      </div>
+
+      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="square">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/portfolio" onclick="closeMobileMenu()" class="nav-active"><span class="slash">//</span> <span data-en>work</span><span data-zh>作品</span></a>
+    <a href="/#about" onclick="closeMobileMenu()"><span class="slash">//</span> <span data-en>about</span><span data-zh>關於</span></a>
+    <a href="/#contact" onclick="closeMobileMenu()"><span class="slash">//</span> <span data-en>contact</span><span data-zh>聯絡</span></a>
+    <button onclick="toggleLang(); closeMobileMenu()" aria-label="Toggle language">
+      <span class="lang-en">EN</span> / <span class="lang-zh">中文</span>
+    </button>
+    <a href="/#contact" class="nav-cta-mobile" onclick="closeMobileMenu()">
+      <span data-en>GET A FREE AUDIT</span><span data-zh>免費網站審核</span>
+    </a>
+  </div>
+
+  <!-- ============================================================
+       PORTFOLIO HERO
+       ============================================================ -->
+  <section class="port-hero" id="main-content">
+    <div class="container">
+      <p class="label">
+        <span class="section-marker">// </span>
+        <span data-en>WORK</span><span data-zh>作品</span>
+      </p>
+
+      <h1>
+        <span data-en>Sites we've built<span class="slash">.</span></span>
+        <span data-zh>我們建立的網站<span class="slash">。</span></span>
+      </h1>
+
+      <p class="desc">
+        <span data-en>Live demos you can click through. Real designs for real industries.</span>
+        <span data-zh>可以瀏覽的即時示範。為真實行業設計的真實作品。</span>
+      </p>
+
+      <div class="filters" id="filterBar">
+        <!-- Rendered by JS from PROJECTS categories -->
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ============================================================
+       PROJECTS (rendered by JS)
+       ============================================================ -->
+  <div class="container" id="projectsContainer">
+    <!-- All project cards injected here -->
+  </div>
+
+  <hr>
+
+  <!-- ============================================================
+       CTA
+       ============================================================ -->
+  <section class="cta-section section-dark">
+    <div class="container">
+      <p class="label" style="color: var(--accent);">
+        <span class="section-marker">// </span>
+        <span data-en>NEXT STEP</span><span data-zh>下一步</span>
+      </p>
+      <h2>
+        <span data-en>Want something like this for your business<span class="slash">?</span></span>
+        <span data-zh>想為你的企業打造類似的網站<span class="slash">？</span></span>
+      </h2>
+      <div class="cta-buttons">
+        <a href="/#contact" class="btn btn-primary">
+          <span data-en>GET A FREE AUDIT →</span><span data-zh>獲取免費審核 →</span>
+        </a>
+        <a href="https://wa.me/85246105157" target="_blank" rel="noopener" class="btn btn-secondary">
+          <span data-en>WHATSAPP US →</span><span data-zh>WHATSAPP 我們 →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER (shared)
+       ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="logo">
+            <span class="slash">//</span> lekker<span class="slash">/</span>design
+          </span>
+        </div>
+        <div class="footer-links">
+          <a href="/portfolio"><span class="slash">//</span> <span data-en>work</span><span data-zh>作品</span></a>
+          <a href="/#about"><span class="slash">//</span> <span data-en>about</span><span data-zh>關於</span></a>
+          <a href="/#contact"><span class="slash">//</span> <span data-en>contact</span><span data-zh>聯絡</span></a>
+        </div>
+        <div class="footer-info">
+          <p><span data-en>Hong Kong</span><span data-zh>香港</span></p>
+          <p>hello@lekker.design</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 lekker.design</p>
+        <p><span class="slash">//</span> <span data-en>designed & built by lekker</span><span data-zh>由 lekker 設計及建立</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       WHATSAPP FLOAT (shared)
+       ============================================================ -->
+  <a href="https://wa.me/85246105157" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // ================================================================
+    // PROJECT DATA — Add a new project by adding one object. Zero HTML changes.
+    // ================================================================
+    var PROJECTS = [
+      {
+        id: "aesthetic",
+        title: "LUMIÈRE Aesthetic Clinic",
+        titleZh: "LUMIÈRE 醫學美容中心",
+        subtitle: "Aesthetic Clinic — Causeway Bay",
+        subtitleZh: "醫學美容診所 — 銅鑼灣",
+        category: "Medical",
+        categoryZh: "醫療",
+        year: "2026",
+        description: "A premium, editorial-inspired site for an aesthetic clinic. Warm palette, elegant typography, and a design that communicates luxury without feeling clinical.",
+        descriptionZh: "為醫學美容診所設計的高端編輯風格網站。溫暖色調、優雅字體，設計傳達奢華感而不失親切。",
+        features: ["Editorial Design", "WhatsApp Booking", "Bilingual EN/中文", "Treatment Showcase"],
+        featuresZh: ["編輯風格設計", "WhatsApp 預約", "雙語中英文", "療程展示"],
+        liveUrl: "https://aesthetic-delta.vercel.app/",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=75",
+        accent: "#FF5722",
+        featured: true
+      },
+      {
+        id: "dental",
+        title: "Smile Central Dental",
+        titleZh: "中環微笑牙科",
+        subtitle: "Dental Clinic — Central, Hong Kong",
+        subtitleZh: "牙科診所 — 香港中環",
+        category: "Medical",
+        categoryZh: "醫療",
+        year: "2026",
+        description: "A modern, mobile-first redesign for a dental practice. Bilingual EN/中文, WhatsApp booking integration, and a clean layout that builds patient trust.",
+        descriptionZh: "為牙科診所進行現代化手機優先重新設計。雙語中英文、WhatsApp 預約整合，以及建立患者信任的簡潔排版。",
+        features: ["Bilingual EN/中文", "WhatsApp Booking", "Mobile-First", "Google Maps"],
+        featuresZh: ["雙語中英文", "WhatsApp 預約", "手機優先", "Google 地圖"],
+        liveUrl: "https://dentist-eta-topaz.vercel.app/",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=75",
+        accent: "#FF5722",
+        featured: true
+      },
+      {
+        id: "chiro",
+        title: "Dr. Chris Ho Chiropractic",
+        titleZh: "何醫生脊醫中心",
+        subtitle: "Chiropractic Clinic — Hong Kong",
+        subtitleZh: "脊醫診所 — 香港",
+        category: "Medical",
+        categoryZh: "醫療",
+        year: "2026",
+        description: "A professional, trust-building site for a chiropractic practice. Clean layout, service breakdowns, and WhatsApp booking to reduce friction for new patients.",
+        descriptionZh: "為脊醫診所設計的專業網站，建立信任感。簡潔排版、服務介紹和 WhatsApp 預約，降低新患者的預約門檻。",
+        features: ["Professional Layout", "WhatsApp Booking", "Service Breakdown", "Bilingual"],
+        featuresZh: ["專業排版", "WhatsApp 預約", "服務介紹", "雙語"],
+        liveUrl: "https://hk-client-drchrisho.vercel.app/",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=75",
+        accent: "#2196F3",
+        featured: false
+      },
+      {
+        id: "vet",
+        title: "Happy Pets Veterinary",
+        titleZh: "開心寵物獸醫",
+        subtitle: "Veterinary Clinic — Happy Valley",
+        subtitleZh: "獸醫診所 — 跑馬地",
+        category: "Medical",
+        categoryZh: "醫療",
+        year: "2026",
+        description: "A warm, approachable site for a veterinary practice. Pet owners can book via WhatsApp, browse services, and meet the team.",
+        descriptionZh: "為獸醫診所設計溫馨友善的網站。寵物主人可通過 WhatsApp 預約、瀏覽服務和認識團隊。",
+        features: ["Bilingual EN/中文", "WhatsApp Booking", "Team Profiles", "Service Showcase"],
+        featuresZh: ["雙語中英文", "WhatsApp 預約", "團隊介紹", "服務展示"],
+        liveUrl: "https://vet-beryl.vercel.app/",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=75",
+        accent: "#4CAF50",
+        featured: false
+      },
+      {
+        id: "property",
+        title: "EPS Property",
+        titleZh: "EPS 物業",
+        subtitle: "Property Agency — Discovery Bay",
+        subtitleZh: "地產代理 — 愉景灣",
+        category: "Property",
+        categoryZh: "物業",
+        year: "2026",
+        description: "A listings-focused redesign for a property agency. Clean property grid, advanced filtering, and WhatsApp enquiry buttons that convert browsers into buyers.",
+        descriptionZh: "為地產代理進行以樓盤為重點的重新設計。簡潔的樓盤列表、篩選功能和 WhatsApp 查詢按鈕。",
+        features: ["Property Listings", "WhatsApp Enquiry", "Area Guide", "Bilingual"],
+        featuresZh: ["樓盤列表", "WhatsApp 查詢", "地區指南", "雙語"],
+        liveUrl: "https://eps-demo-project.vercel.app/",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=75",
+        accent: "#2196F3",
+        featured: false
+      },
+      {
+        id: "tutor",
+        title: "Language & Learning Centre",
+        titleZh: "語言學習中心",
+        subtitle: "Tutorial Centre — Hong Kong",
+        subtitleZh: "補習中心 — 香港",
+        category: "Education",
+        categoryZh: "教育",
+        year: "2026",
+        description: "A clear, parent-friendly site for a tutorial and language centre. Course listings, teacher profiles, and easy WhatsApp enrolment for busy Hong Kong parents.",
+        descriptionZh: "為補習及語言中心設計的清晰、家長友善網站。課程列表、導師簡介和便捷的 WhatsApp 報名，方便繁忙的香港家長。",
+        features: ["Course Listings", "Teacher Profiles", "WhatsApp Enrolment", "Bilingual"],
+        featuresZh: ["課程列表", "導師簡介", "WhatsApp 報名", "雙語"],
+        liveUrl: "https://tutor-lac.vercel.app/",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=75",
+        accent: "#FF9800",
+        featured: false
+      },
+      {
+        id: "yoga",
+        title: "Breathe Studio",
+        titleZh: "呼吸工作室",
+        subtitle: "Yoga & Pilates — Hong Kong",
+        subtitleZh: "瑜伽及普拉提 — 香港",
+        category: "Wellness",
+        categoryZh: "健康",
+        year: "2026",
+        description: "A calming, minimal site for a yoga and pilates studio. Class schedules, instructor bios, and WhatsApp booking — designed to feel as serene as the studio itself.",
+        descriptionZh: "為瑜伽及普拉提工作室設計的寧靜簡約網站。課程時間表、導師簡介和 WhatsApp 預約 — 設計如工作室般寧靜。",
+        features: ["Class Schedule", "Instructor Profiles", "WhatsApp Booking", "Bilingual"],
+        featuresZh: ["課程時間表", "導師簡介", "WhatsApp 預約", "雙語"],
+        liveUrl: "https://yoga-kohl-six.vercel.app/",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&q=75",
+        accent: "#7CB342",
+        featured: false
+      },
+      {
+        id: "finance",
+        title: "Blackhorn Capital",
+        titleZh: "Blackhorn Capital",
+        subtitle: "Family Office — Hong Kong",
+        subtitleZh: "家族辦公室 — 香港",
+        category: "Finance",
+        categoryZh: "金融",
+        year: "2026",
+        description: "A dark, authoritative site for a family office. Understated design that communicates credibility, discretion, and institutional-grade professionalism.",
+        descriptionZh: "為家族辦公室設計的深色權威風格網站。低調設計傳達可信度、審慎態度和機構級專業形象。",
+        features: ["Dark Luxury Design", "Institutional Tone", "Responsive", "Professional"],
+        featuresZh: ["深色奢華設計", "機構風格", "響應式設計", "專業形象"],
+        liveUrl: "https://blackhorn-web.vercel.app",
+        beforeImage: null,
+        afterImage: null,
+        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=75",
+        accent: "#CFB53B",
+        featured: true
+      }
+      // TEMPLATE — copy to add a new project:
+      // {
+      //   id: "slug",
+      //   title: "Business Name",
+      //   titleZh: "中文名稱",
+      //   subtitle: "Industry — Location",
+      //   subtitleZh: "行業 — 地點",
+      //   category: "Category",
+      //   categoryZh: "分類",
+      //   year: "2026",
+      //   description: "English description...",
+      //   descriptionZh: "中文描述...",
+      //   features: ["Feature 1", "Feature 2"],
+      //   featuresZh: ["功能一", "功能二"],
+      //   liveUrl: "https://your-demo.vercel.app/",
+      //   beforeImage: null,
+      //   afterImage: null,
+      //   image: "https://images.unsplash.com/photo-xxx?w=800&q=75",
+      //   accent: "#FF5722",
+      //   featured: false
+      // },
+    ];
+
+    // ================================================================
+    // STATE
+    // ================================================================
+    var currentLang = 'en';
+    var currentFilter = 'ALL';
+
+    // Check URL for ?lang=zh
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('lang') === 'zh') {
+        currentLang = 'zh';
+        document.body.classList.add('zh');
+      }
+    })();
+
+    // ================================================================
+    // LANGUAGE TOGGLE
+    // ================================================================
+    function toggleLang() {
+      currentLang = currentLang === 'en' ? 'zh' : 'en';
+      if (currentLang === 'zh') {
+        document.body.classList.add('zh');
+      } else {
+        document.body.classList.remove('zh');
+      }
+      // Update URL without reload
+      var url = new URL(window.location);
+      if (currentLang === 'zh') {
+        url.searchParams.set('lang', 'zh');
+      } else {
+        url.searchParams.delete('lang');
+      }
+      history.replaceState(null, '', url);
+      // Re-render data-driven content
+      buildFilters();
+      renderProjects();
+      // Update internal links to propagate lang param
+      var isZh = document.body.classList.contains('zh');
+      document.querySelectorAll('a[href^="/"], a[href^="index"], a[href^="/#"]').forEach(function(link) {
+        var href = link.getAttribute('href');
+        // Remove existing lang param
+        href = href.replace(/[?&]lang=[^&]*/g, '').replace(/[?&]$/, '');
+        if (isZh) {
+          href += (href.indexOf('?') > -1 ? '&' : '?') + 'lang=zh';
+        }
+        link.setAttribute('href', href);
+      });
+    }
+
+    // ================================================================
+    // MOBILE MENU
+    // ================================================================
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    // ================================================================
+    // FILTERS
+    // ================================================================
+    function buildFilters() {
+      var cats = {};
+      PROJECTS.forEach(function(p) {
+        cats[p.category] = p.categoryZh;
+      });
+
+      var keys = Object.keys(cats);
+      var bar = document.getElementById('filterBar');
+      if (keys.length < 3) { bar.style.display = 'none'; return; }
+
+      var isZh = currentLang === 'zh';
+      var html = '<button class="filter-pill' + (currentFilter === 'ALL' ? ' active' : '') + '" onclick="setFilter(\'ALL\', this)">';
+      html += isZh ? '全部' : 'ALL';
+      html += '</button>';
+
+      keys.forEach(function(cat) {
+        html += '<button class="filter-pill' + (currentFilter === cat ? ' active' : '') + '" onclick="setFilter(\'' + cat + '\', this)">';
+        html += isZh ? cats[cat] : cat.toUpperCase();
+        html += '</button>';
+      });
+
+      bar.innerHTML = html;
+    }
+
+    function setFilter(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-pill').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      btn.classList.add('active');
+
+      // Animate cards out, then render new ones in
+      var cards = document.querySelectorAll('#projectsContainer > *');
+      if (cards.length > 0 && typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.to(cards, {
+          opacity: 0, y: -10, duration: 0.2, ease: 'power2.out',
+          onComplete: function() {
+            renderProjects();
+            animateProjectsIn();
+          }
+        });
+      } else {
+        renderProjects();
+      }
+    }
+
+    // Animate project cards in after render
+    function animateProjectsIn() {
+      if (typeof gsap === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var featured = document.querySelectorAll('.project-featured');
+      var compact = document.querySelectorAll('.project-compact');
+
+      if (featured.length) {
+        gsap.from(featured, {
+          y: 40, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out'
+        });
+      }
+
+      if (compact.length) {
+        gsap.from(compact, {
+          x: -20, opacity: 0, duration: 0.4, stagger: 0.05, ease: 'power2.out'
+        });
+      }
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+    }
+
+    // ================================================================
+    // RENDER PROJECTS
+    // ================================================================
+    function renderProjects() {
+      var container = document.getElementById('projectsContainer');
+      var filtered = PROJECTS;
+
+      if (currentFilter !== 'ALL') {
+        filtered = PROJECTS.filter(function(p) { return p.category === currentFilter; });
+      }
+
+      var html = '';
+      var idx = 0;
+
+      filtered.forEach(function(p) {
+        idx++;
+        var num = idx < 10 ? '0' + idx : '' + idx;
+        var isZh = currentLang === 'zh';
+        var title = p.title;
+        var titleZh = p.titleZh;
+        var subtitle = isZh ? p.subtitleZh : p.subtitle;
+        var cat = isZh ? p.categoryZh : p.category;
+        var desc = isZh ? p.descriptionZh : p.description;
+        var feats = isZh ? p.featuresZh : p.features;
+        var viewText = isZh ? '查看完整網站 →' : 'VIEW FULL SITE →';
+        var deskText = isZh ? '桌面版' : 'DESKTOP';
+        var mobText = isZh ? '手機版' : 'MOBILE';
+        var loadText = isZh ? '// 載入中 ' + p.id + '...' : '// loading ' + p.id + '...';
+        var expandText = isZh ? '查看示範' : 'VIEW DEMO';
+
+        if (p.featured) {
+          html += renderFeatured(p, num, title, titleZh, subtitle, cat, desc, feats, viewText, deskText, mobText, loadText);
+        } else {
+          html += renderCompact(p, num, title, titleZh, subtitle, cat, desc, feats, viewText, deskText, mobText, loadText, expandText);
+        }
+      });
+
+      container.innerHTML = html;
+
+      // Set up IntersectionObserver for featured iframes
+      setupLazyIframes();
+    }
+
+    // ================================================================
+    // FEATURED PROJECT RENDERER
+    // ================================================================
+    function renderFeatured(p, num, title, titleZh, subtitle, cat, desc, feats, viewText, deskText, mobText, loadText) {
+      var tagsHtml = '';
+      feats.forEach(function(f) {
+        tagsHtml += '<span class="tag">' + f + '</span>';
+      });
+
+      var baHtml = '';
+      if (p.beforeImage && p.afterImage) {
+        var beforeLabel = currentLang === 'zh' ? '之前' : 'BEFORE';
+        var afterLabel = currentLang === 'zh' ? '之後' : 'AFTER';
+        baHtml = '<div class="ba-section">'
+          + '<div class="ba-section-label"><span class="section-marker">// </span>' + (currentLang === 'zh' ? '前後對比' : 'BEFORE / AFTER') + '</div>'
+          + '<div class="ba-slider" onmousedown="startSlider(event, this)" ontouchstart="startSlider(event, this)">'
+          + '<div class="ba-before"><img src="' + p.beforeImage + '" alt="Before" draggable="false"></div>'
+          + '<div class="ba-after"><img src="' + p.afterImage + '" alt="After" draggable="false"></div>'
+          + '<div class="ba-handle" tabindex="0" role="slider" aria-label="Before/after comparison slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><div class="ba-handle-grip">↔</div></div>'
+          + '<span class="ba-label-tag ba-label-before">' + beforeLabel + '</span>'
+          + '<span class="ba-label-tag ba-label-after">' + afterLabel + '</span>'
+          + '</div>'
+          + '</div>';
+      }
+
+      return '<div class="project-featured">'
+        + '<div class="pf-header">'
+        + '<span class="pf-number"><span class="section-marker">// </span>' + num + '</span>'
+        + '<div class="pf-meta">'
+        + '<span class="pf-category">' + cat + '</span>'
+        + '<span class="pf-year">' + p.year + '</span>'
+        + '</div>'
+        + '</div>'
+        + '<h2 class="pf-title">' + title + '</h2>'
+        + '<div class="pf-title-zh">' + titleZh + '</div>'
+        + '<div class="pf-subtitle">' + subtitle + '</div>'
+
+        + '<div class="iframe-wrapper">'
+        + '<div class="iframe-container" id="iframe-' + p.id + '" data-src="' + p.liveUrl + '" data-id="' + p.id + '">'
+        + '<div class="iframe-loading" id="loading-' + p.id + '">'
+        + '<span class="loading-text">' + loadText + '</span>'
+        + '</div>'
+        + '</div>'
+        + '<div class="iframe-controls">'
+        + '<button class="device-btn active" onclick="setDevice(\'' + p.id + '\', \'desktop\', this)">' + deskText + '</button>'
+        + '<button class="device-btn" onclick="setDevice(\'' + p.id + '\', \'mobile\', this)">' + mobText + '</button>'
+        + '<a href="' + p.liveUrl + '" target="_blank" rel="noopener" class="view-full">' + viewText + '</a>'
+        + '</div>'
+        + '</div>'
+
+        + baHtml
+
+        + '<p class="pf-desc">' + desc + '</p>'
+        + '<div class="pf-tags">' + tagsHtml + '</div>'
+        + '</div>';
+    }
+
+    // ================================================================
+    // COMPACT PROJECT RENDERER
+    // ================================================================
+    function renderCompact(p, num, title, titleZh, subtitle, cat, desc, feats, viewText, deskText, mobText, loadText, expandText) {
+      var tagsHtml = '';
+      feats.forEach(function(f) {
+        tagsHtml += '<span class="tag">' + f + '</span>';
+      });
+
+      return '<div class="project-compact" id="card-' + p.id + '">'
+        + '<div class="pc-thumb" onclick="toggleExpand(\'' + p.id + '\')">'
+        + '<img src="' + p.image + '" alt="' + title + '" loading="lazy">'
+        + '<div class="pc-thumb-overlay"><span class="pc-thumb-label">' + expandText + '</span></div>'
+        + '</div>'
+        + '<div class="pc-body">'
+        + '<div class="pc-header">'
+        + '<span class="pc-number"><span class="section-marker">// </span>' + num + '</span>'
+        + '<div class="pf-meta">'
+        + '<span class="pf-category">' + cat + '</span>'
+        + '<span class="pf-year">' + p.year + '</span>'
+        + '</div>'
+        + '</div>'
+        + '<h3 class="pc-title">' + title + '</h3>'
+        + '<div class="pc-title-zh">' + titleZh + '</div>'
+        + '<div class="pc-subtitle">' + subtitle + '</div>'
+        + '<p class="pc-desc">' + desc + '</p>'
+        + '<div class="pc-tags">' + tagsHtml + '</div>'
+        + '<div class="pc-actions">'
+        + '<button class="pc-expand-btn" onclick="toggleExpand(\'' + p.id + '\')">' + expandText + '</button>'
+        + '<a href="' + p.liveUrl + '" target="_blank" rel="noopener" class="pc-view-link">' + viewText + '</a>'
+        + '</div>'
+        + '</div>'
+
+        + '<div class="pc-iframe-expand" id="expand-' + p.id + '">'
+        + '<div class="iframe-wrapper">'
+        + '<div class="iframe-container" id="iframe-compact-' + p.id + '" data-src="' + p.liveUrl + '" data-id="' + p.id + '">'
+        + '<div class="iframe-loading" id="loading-compact-' + p.id + '">'
+        + '<span class="loading-text">' + loadText + '</span>'
+        + '</div>'
+        + '</div>'
+        + '<div class="iframe-controls">'
+        + '<button class="device-btn active" onclick="setDevice(\'compact-' + p.id + '\', \'desktop\', this)">' + deskText + '</button>'
+        + '<button class="device-btn" onclick="setDevice(\'compact-' + p.id + '\', \'mobile\', this)">' + mobText + '</button>'
+        + '<a href="' + p.liveUrl + '" target="_blank" rel="noopener" class="view-full">' + viewText + '</a>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+
+        + '</div>';
+    }
+
+    // ================================================================
+    // IFRAME LAZY LOADING — IntersectionObserver for featured
+    // ================================================================
+    function setupLazyIframes() {
+      var containers = document.querySelectorAll('.project-featured .iframe-container[data-src]');
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              loadIframe(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '200px' });
+
+        containers.forEach(function(c) { observer.observe(c); });
+      } else {
+        containers.forEach(function(c) { loadIframe(c); });
+      }
+    }
+
+    function loadIframe(container) {
+      var src = container.getAttribute('data-src');
+      if (!src || container.querySelector('iframe') || container.querySelector('.iframe-fallback')) return;
+
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
+      var projectId = container.getAttribute('data-id');
+      var projectTitle = 'Live demo';
+      if (projectId) {
+        var matchedProject = PROJECTS.filter(function(proj) { return proj.id === projectId; })[0];
+        if (matchedProject) projectTitle = 'Live demo: ' + matchedProject.title;
+      }
+      iframe.setAttribute('title', projectTitle);
+
+      // Timeout fallback — if iframe doesn't load in 10s, show fallback
+      var fallbackTimer = setTimeout(function() {
+        showIframeFallback(container, src);
+      }, 10000);
+
+      iframe.onload = function() {
+        clearTimeout(fallbackTimer);
+        var loader = container.querySelector('.iframe-loading');
+        if (loader) loader.classList.add('loaded');
+      };
+
+      iframe.onerror = function() {
+        clearTimeout(fallbackTimer);
+        showIframeFallback(container, src);
+      };
+
+      container.appendChild(iframe);
+    }
+
+    function showIframeFallback(container, src) {
+      var existing = container.querySelector('iframe');
+      if (existing) existing.remove();
+      var loader = container.querySelector('.iframe-loading');
+      if (loader) loader.classList.add('loaded');
+
+      var isZh = currentLang === 'zh';
+      var fallback = document.createElement('div');
+      fallback.className = 'iframe-fallback';
+      fallback.innerHTML = '<div class="iframe-fallback-text">'
+        + (isZh ? '// 預覽無法載入' : '// Preview unavailable')
+        + '</div>'
+        + '<a href="' + src + '" target="_blank" rel="noopener">'
+        + (isZh ? '在新分頁中開啟 →' : 'Open in new tab →')
+        + '</a>';
+      container.appendChild(fallback);
+    }
+
+    // ================================================================
+    // EXPAND COMPACT CARD — load iframe on demand
+    // ================================================================
+    function toggleExpand(id) {
+      var expandEl = document.getElementById('expand-' + id);
+      if (!expandEl) return;
+
+      var isOpen = expandEl.classList.contains('open');
+
+      if (isOpen) {
+        expandEl.classList.remove('open');
+      } else {
+        expandEl.classList.add('open');
+        var container = expandEl.querySelector('.iframe-container[data-src]');
+        if (container && !container.querySelector('iframe') && !container.querySelector('.iframe-fallback')) {
+          loadIframe(container);
+        }
+        setTimeout(function() {
+          expandEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+
+    // ================================================================
+    // DEVICE TOGGLE (Desktop / Mobile)
+    // ================================================================
+    function setDevice(id, mode, btn) {
+      var container = document.getElementById('iframe-' + id);
+      if (!container) return;
+
+      var controls = btn.parentElement;
+      controls.querySelectorAll('.device-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      btn.classList.add('active');
+
+      if (mode === 'mobile') {
+        container.classList.add('mobile-view');
+      } else {
+        container.classList.remove('mobile-view');
+      }
+    }
+
+    // ================================================================
+    // BEFORE / AFTER SLIDER — clip-path + requestAnimationFrame
+    // ================================================================
+    var activeSlider = null;
+    var sliderRafId = null;
+    var sliderTargetPct = 50;
+
+    function startSlider(e, slider) {
+      e.preventDefault();
+      activeSlider = slider;
+      updateSliderPosition(e);
+
+      document.addEventListener('mousemove', onSliderMove);
+      document.addEventListener('mouseup', stopSlider);
+      document.addEventListener('touchmove', onSliderMove, { passive: false });
+      document.addEventListener('touchend', stopSlider);
+    }
+
+    function onSliderMove(e) {
+      if (!activeSlider) return;
+      e.preventDefault();
+      updateSliderPosition(e);
+    }
+
+    function updateSliderPosition(e) {
+      if (!activeSlider) return;
+
+      var rect = activeSlider.getBoundingClientRect();
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      var x = clientX - rect.left;
+      sliderTargetPct = Math.max(2, Math.min(98, (x / rect.width) * 100));
+
+      if (!sliderRafId) {
+        sliderRafId = requestAnimationFrame(applySliderPosition);
+      }
+    }
+
+    function applySliderPosition() {
+      sliderRafId = null;
+      if (!activeSlider) return;
+
+      var afterEl = activeSlider.querySelector('.ba-after');
+      var handleEl = activeSlider.querySelector('.ba-handle');
+
+      if (afterEl) {
+        afterEl.style.clipPath = 'inset(0 0 0 ' + sliderTargetPct + '%)';
+      }
+      if (handleEl) {
+        handleEl.style.left = sliderTargetPct + '%';
+      }
+    }
+
+    function stopSlider() {
+      activeSlider = null;
+      if (sliderRafId) {
+        cancelAnimationFrame(sliderRafId);
+        sliderRafId = null;
+      }
+      document.removeEventListener('mousemove', onSliderMove);
+      document.removeEventListener('mouseup', stopSlider);
+      document.removeEventListener('touchmove', onSliderMove);
+      document.removeEventListener('touchend', stopSlider);
+    }
+
+    // Keyboard support for before/after slider (delegated, works with dynamic content)
+    document.addEventListener('keydown', function(e) {
+      if (!e.target.classList.contains('ba-handle')) return;
+      var handle = e.target;
+      var slider = handle.parentElement;
+      var step = 2;
+      var current = parseFloat(handle.getAttribute('aria-valuenow') || '50');
+      var afterEl = slider ? slider.querySelector('.ba-after') : null;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        current = Math.max(0, current - step);
+        handle.setAttribute('aria-valuenow', current);
+        if (afterEl) afterEl.style.clipPath = 'inset(0 0 0 ' + current + '%)';
+        handle.style.left = current + '%';
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        current = Math.min(100, current + step);
+        handle.setAttribute('aria-valuenow', current);
+        if (afterEl) afterEl.style.clipPath = 'inset(0 0 0 ' + current + '%)';
+        handle.style.left = current + '%';
+      }
+    });
+
+    // ================================================================
+    // INIT
+    // ================================================================
+    buildFilters();
+    renderProjects();
+
+    // Animate initial cards in (runs before paint)
+    animateProjectsIn();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          closeMobileMenu();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ================================================================
+    // GSAP SCROLL ANIMATIONS
+    // ================================================================
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (typeof gsap === 'undefined') return;
+
+      gsap.registerPlugin(ScrollTrigger);
+      var isMobile = 'ontouchstart' in window;
+
+      // ---- PORTFOLIO HERO (page load, not scroll) ----
+      gsap.from('.port-hero .label', {
+        opacity: 0, y: 10, duration: 0.3, ease: 'power2.out'
+      });
+
+      gsap.from('.port-hero h1', {
+        y: 30, opacity: 0, duration: 0.5, delay: 0.1, ease: 'power2.out'
+      });
+
+      gsap.from('.port-hero .desc', {
+        y: 15, opacity: 0, duration: 0.3, delay: 0.25, ease: 'power2.out'
+      });
+
+      gsap.from('.filter-pill', {
+        y: 10, opacity: 0, duration: 0.3, stagger: 0.05, delay: 0.35, ease: 'power2.out'
+      });
+
+      // ---- CTA SECTION ----
+      gsap.from('.cta-section h2', {
+        scrollTrigger: { trigger: '.cta-section', start: 'top 85%' },
+        y: 30, opacity: 0, duration: 0.5, ease: 'power2.out'
+      });
+
+      gsap.from('.cta-buttons .btn', {
+        scrollTrigger: { trigger: '.cta-section', start: 'top 85%' },
+        y: 15, opacity: 0, duration: 0.3, stagger: 0.08, delay: 0.15, ease: 'power2.out'
+      });
+
+      // ---- SECTION MARKERS: typewriter clip reveal ----
+      if (!isMobile) {
+        document.querySelectorAll('.cta-section .label').forEach(function(head) {
+          gsap.fromTo(head,
+            { clipPath: 'inset(0 100% 0 0)' },
+            {
+              clipPath: 'inset(0 0% 0 0)',
+              duration: 0.6, ease: 'steps(15)',
+              scrollTrigger: { trigger: head, start: 'top 85%' }
+            }
+          );
+        });
+      }
+
+      // ---- FOOTER ----
+      gsap.from('.footer-grid > div', {
+        scrollTrigger: { trigger: 'footer', start: 'top 90%' },
+        y: 15, opacity: 0, duration: 0.3, stagger: 0.08, ease: 'power2.out'
+      });
+
+      // ---- BEFORE/AFTER SLIDER PREVIEW ----
+      // When scrolled into view: handle sweeps 50% → 20% → 80% → 50%
+      document.querySelectorAll('.ba-slider').forEach(function(slider) {
+        var afterEl = slider.querySelector('.ba-after');
+        var handleEl = slider.querySelector('.ba-handle');
+        if (!afterEl || !handleEl) return;
+
+        var obj = { pct: 50 };
+
+        ScrollTrigger.create({
+          trigger: slider, start: 'top 70%', once: true,
+          onEnter: function() {
+            gsap.timeline()
+              .to(obj, {
+                pct: 20, duration: 0.5, ease: 'power2.inOut',
+                onUpdate: function() {
+                  afterEl.style.clipPath = 'inset(0 0 0 ' + obj.pct + '%)';
+                  handleEl.style.left = obj.pct + '%';
+                }
+              })
+              .to(obj, {
+                pct: 80, duration: 0.7, ease: 'power2.inOut',
+                onUpdate: function() {
+                  afterEl.style.clipPath = 'inset(0 0 0 ' + obj.pct + '%)';
+                  handleEl.style.left = obj.pct + '%';
+                }
+              })
+              .to(obj, {
+                pct: 50, duration: 0.3, ease: 'power2.out',
+                onUpdate: function() {
+                  afterEl.style.clipPath = 'inset(0 0 0 ' + obj.pct + '%)';
+                  handleEl.style.left = obj.pct + '%';
+                }
+              });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
