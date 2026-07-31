@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "name": "Lekker Design Studio and Work Archive",
+  "description": "A proof-first studio website and work archive documented from the shipped implementation.",
+  "source": {
+    "product": "PRODUCT.md",
+    "markup": "Lekker.Design/index.html and Lekker.Design/portfolio.html",
+    "styles": "Lekker.Design/portfolio.css and Lekker.Design/home.css",
+    "behavior": "Lekker.Design/portfolio.js and Lekker.Design/home.js"
+  },
+  "tokens": {
+    "colors": {
+      "paper": "#f3f3ef",
+      "paperStrong": "#fbfbf8",
+      "ink": "#12120f",
+      "muted": "#62625d",
+      "line": "#c9c9c2",
+      "lineStrong": "#94948c",
+      "accent": "#f4511e",
+      "accentDark": "#9f2a08"
+    },
+    "font": {
+      "family": "Bricolage Grotesque",
+      "fallback": "Helvetica Neue, Arial, PingFang HK, Microsoft JhengHei, sans-serif",
+      "weights": [400, 600]
+    },
+    "radii": {
+      "media": "0px",
+      "control": "999px"
+    },
+    "shadow": {
+      "heroMedia": "0 24px 70px rgba(18, 18, 15, 0.13)"
+    },
+    "layout": {
+      "container": "min(100% - 40px, 1480px)",
+      "navHeight": "72px",
+      "ease": "cubic-bezier(0.19, 1, 0.22, 1)",
+      "breakpoints": [1080, 820, 560]
+    }
+  },
+  "extensions": {
+    "contentTruth": {
+      "projectCount": 16,
+      "selectedCount": 6,
+      "liveCount": 8,
+      "conceptCount": 8,
+      "languages": ["en", "zh-Hant"],
+      "projectSource": "The project catalog in Lekker.Design/portfolio.js and locally captured screenshots from the linked public sites.",
+      "curation": "The six selected projects are reversible editorial curation, not a performance ranking."
+    },
+    "responsive": {
+      "desktop": "Homepage Proof Collision hero and asymmetric three-build field; portfolio two-column hero, 12-column selected-work field, sticky approach statement, and two-column archive above 1080px.",
+      "tablet": "Homepage proof pair remains opposed while work and process stack; portfolio hero becomes one column below 820px; both pages use the mobile menu.",
+      "mobile": "Homepage keeps a two-line proposition and paired hero proofs, then uses one-column work, disciplines, process, and archive preview. Portfolio uses one selected-work column, 4:3 media, 112px archive thumbnails, and a horizontal filter row below 560px."
+    },
+    "motion": {
+      "hero": "Portfolio uses a four-shot staggered clip reveal; homepage uses two opposed clip reveals followed by the orange studio mark.",
+      "scroll": "IntersectionObserver reveals opacity, translateY, and blur once.",
+      "hover": "Project images scale between 1.018 and 1.035; buttons translate 1px to 2px.",
+      "reducedMotion": "Animations, transforms, filters, smooth scroll, and transitions collapse to immediate states."
+    },
+    "accessibility": {
+      "navigation": "Skip link, semantic landmarks, sticky desktop navigation, labeled mobile menu.",
+      "state": "aria-expanded for the menu, aria-pressed for filters, and a polite live region for archive counts.",
+      "focus": "3px accent outline with 4px offset.",
+      "media": "Selected work has localized alt text; duplicate archive thumbnails are decorative and untabbable.",
+      "preferences": "Reduced motion and reduced transparency are supported."
+    }
+  },
+  "components": [
+    {
+      "name": "SiteHeader",
+      "selector": ".site-header, .site-nav, .mobile-nav",
+      "description": "Sticky three-zone navigation with language persistence and a responsive menu."
+    },
+    {
+      "name": "HeroProofDeck",
+      "selector": ".hero, .hero-deck, .deck-shot",
+      "description": "A five-word thesis paired with four overlapping verified project screenshots."
+    },
+    {
+      "name": "HomeProofCollision",
+      "selector": ".home-hero, .home-stage, .home-stage-project",
+      "description": "A two-line proposition paired with two opposed live-project frames in the initial viewport."
+    },
+    {
+      "name": "HomeLiveWork",
+      "selector": ".home-work-grid, .home-work-card, .home-work-stack",
+      "description": "Three verified live builds arranged as one lead proof and two stacked supporting proofs."
+    },
+    {
+      "name": "HomeDisciplineAndProcess",
+      "selector": ".home-discipline-layout, .home-process-steps",
+      "description": "A four-discipline ledger with filtered archive links followed by the Frame, Make, Refine sequence."
+    },
+    {
+      "name": "WorkDisciplineNav",
+      "selector": ".work-nav, [data-filter-jump]",
+      "description": "Four semantic links that jump to and filter the archive."
+    },
+    {
+      "name": "SelectedWork",
+      "selector": ".selected-grid, .selected-card",
+      "description": "Six data-driven projects arranged as an asymmetric 12-column viewing field."
+    },
+    {
+      "name": "ApproachList",
+      "selector": ".approach-layout, .discipline-list",
+      "description": "Sticky editorial statement and a semantic definition list of four disciplines."
+    },
+    {
+      "name": "ArchiveFilters",
+      "selector": ".archive-controls, .filter-button",
+      "description": "Pill filters with pressed state and live result count."
+    },
+    {
+      "name": "ArchiveLedger",
+      "selector": ".archive-grid, .archive-card",
+      "description": "A compact project ledger that clearly separates eight live builds from eight concept studies."
+    },
+    {
+      "name": "CallToAction",
+      "selector": ".cta",
+      "description": "The single full-width vermilion story break and final Start a project action."
+    }
+  ]
+}

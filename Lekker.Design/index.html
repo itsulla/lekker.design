@@ -1,651 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lekker.design — The Website Your Brand Deserves</title>
-  <meta name="description" content="Boutique web design studio. Stunning design, blazing performance, crafted by designers who care. Launch in days, not months." />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="lekker.design — The Website Your Brand Deserves" />
-  <meta property="og:description" content="Boutique web design studio. Stunning design, blazing performance, crafted by designers who care." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lekker.design" />
-  <meta property="og:image" content="https://lekker.design/og-image.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <link rel="canonical" href="https://lekker.design/" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='16' fill='%23000'/><text x='6' y='23' font-family='Georgia,serif' font-style='italic' font-size='18' fill='%23fff'>lk</text></svg>" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ["'Instrument Serif'", "serif"],
-            body:    ["'Barlow'", "sans-serif"],
-          },
-        },
-      },
-    };
-  </script>
-
-  <style>
-    :root {
-      --glass-bg: rgba(255, 255, 255, 0.06);
-      --glass-border: rgba(255, 255, 255, 0.25);
-      --glass-blur: 16px;
-      --glass-strong-blur: 50px;
-      --accent-hue: 213;
-      --accent-sat: 45%;
-      --accent-light: 67%;
-    }
-
-    html, body { background: #000; color: #fff; }
-    body { font-family: 'Barlow', sans-serif; -webkit-font-smoothing: antialiased; }
-
-    /* ---- Atmospheric backgrounds ---- */
-    .atmos-hero {
-      background:
-        radial-gradient(ellipse 80% 50% at 50% 30%, hsl(var(--accent-hue) var(--accent-sat) 35% / 0.45), transparent 60%),
-        radial-gradient(ellipse 60% 40% at 20% 70%, hsl(calc(var(--accent-hue) + 30) 40% 30% / 0.35), transparent 60%),
-        radial-gradient(ellipse 70% 60% at 80% 80%, hsl(calc(var(--accent-hue) - 40) 50% 25% / 0.4), transparent 60%),
-        #000;
-    }
-    .atmos-start {
-      background:
-        radial-gradient(ellipse 100% 60% at 50% 50%, hsl(var(--accent-hue) 50% 30% / 0.5), transparent 65%),
-        radial-gradient(ellipse 50% 40% at 10% 20%, hsl(calc(var(--accent-hue) + 20) 60% 25% / 0.4), transparent 60%),
-        #050507;
-    }
-    .atmos-noise::after {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.15 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
-      opacity: 0.35;
-      pointer-events: none;
-      mix-blend-mode: overlay;
-    }
-    .atmos-glow-1, .atmos-glow-2 {
-      position: absolute; border-radius: 9999px;
-      filter: blur(80px); opacity: 0.5; pointer-events: none;
-      animation: drift 18s ease-in-out infinite;
-    }
-    .atmos-glow-1 { width: 500px; height: 500px; background: hsl(var(--accent-hue) var(--accent-sat) 50% / 0.35); top: 20%; left: 10%; }
-    .atmos-glow-2 { width: 600px; height: 600px; background: hsl(calc(var(--accent-hue) - 30) 55% 45% / 0.25); top: 40%; right: 5%; animation-delay: -9s; }
-    @keyframes drift {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50%       { transform: translate(40px, -30px) scale(1.1); }
-    }
-
-    /* ---- Liquid Glass ---- */
-    .liquid-glass {
-      background: rgba(255,255,255,0.04);
-      background-blend-mode: luminosity;
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
-      position: relative; overflow: hidden;
-    }
-    .liquid-glass::before {
-      content: ''; position: absolute; inset: 0;
-      border-radius: inherit; padding: 1.4px;
-      background: linear-gradient(180deg,
-        rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
-        rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
-        rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      pointer-events: none;
-    }
-    .liquid-glass-strong {
-      background: rgba(255,255,255,0.06);
-      background-blend-mode: luminosity;
-      backdrop-filter: blur(var(--glass-strong-blur));
-      -webkit-backdrop-filter: blur(var(--glass-strong-blur));
-      box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
-      position: relative; overflow: hidden;
-      transition: background 0.2s ease;
-    }
-    .liquid-glass-strong::before {
-      content: ''; position: absolute; inset: 0;
-      border-radius: inherit; padding: 1.4px;
-      background: linear-gradient(180deg,
-        rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 20%,
-        rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
-        rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.5) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      pointer-events: none;
-    }
-    .liquid-glass-strong:hover { background: rgba(255,255,255,0.1); }
-    .liquid-glass > *, .liquid-glass-strong > * { position: relative; z-index: 1; }
-
-    /* ---- Section fades ---- */
-    .fade-top-black    { background: linear-gradient(to bottom, #000, transparent); }
-    .fade-bottom-black { background: linear-gradient(to top, #000, transparent); }
-
-    /* ---- Preview cards ---- */
-    .preview-card {
-      background:
-        linear-gradient(135deg, hsl(var(--accent-hue) var(--accent-sat) 35% / 0.5), hsl(calc(var(--accent-hue) - 30) 50% 25% / 0.6)),
-        #0a0a10;
-      position: relative; overflow: hidden;
-    }
-    .preview-card::after {
-      content: ''; position: absolute; inset: 0;
-      background: repeating-linear-gradient(45deg, transparent 0 20px, rgba(255,255,255,0.02) 20px 21px);
-      pointer-events: none;
-    }
-
-    /* ---- Scrollbar ---- */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
-  </style>
-
-  <!-- React + Framer Motion (pinned) -->
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <!--
+    THESIS: Different briefs deserve different systems. The page retires the old claim-first agency stack and lets working artifacts lead.
+    OWN-WORLD: Cool paper, near-black type, vermilion punctuation, sharp project media, pill controls, and Bricolage Grotesque.
+    STORY: Visitors meet two opposed proof points, see three live builds, understand the studio's range and process, inspect the archive, then contact Lekker.
+    FIRST VIEWPORT: A two-line proposition, short proof statement, two actions, and two verified builds all remain visible on a desktop viewport.
+    FORM: Proof Collision, the sixth grounded surface structure from concept seed 32722449, using opposed project frames that resolve into an ordered archive.
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lekker Design Studio | Websites Built for the Job</title>
+  <meta name="description" content="Lekker is an independent web studio building commerce, publications, portfolios, and digital products with their own visual logic.">
+  <meta name="theme-color" content="#f3f3ef">
+  <link rel="canonical" href="https://lekker.design/">
+  <meta property="og:title" content="Lekker Design Studio | Websites Built for the Job">
+  <meta property="og:description" content="Independent web design for commerce, publications, portfolios, and useful digital products.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lekker.design/">
+  <meta property="og:image" content="https://lekker.design/assets/projects/asset-screener.jpg">
+  <meta property="og:image:width" content="1440">
+  <meta property="og:image:height" content="960">
+  <meta property="og:locale" content="en_HK">
+  <meta property="og:locale:alternate" content="zh_HK">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2312120f'/%3E%3Ctext x='12' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='700' fill='%23f4511e'%3E//%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/bricolage-grotesque-600.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/projects/asset-screener.jpg" as="image" type="image/jpeg">
+  <link rel="preload" href="assets/projects/maison-masque.jpg" as="image" type="image/jpeg">
+  <link rel="stylesheet" href="portfolio.css?v=20260731d">
+  <link rel="stylesheet" href="home.css?v=20260731d">
+  <script src="home.js?v=20260731d" defer></script>
 </head>
-<body class="bg-black">
-  <div id="root"></div>
+<body class="home-page" data-lang="en">
+  <a class="skip-link" href="#main">
+    <span data-en>Skip to content</span><span data-zh>跳到主要內容</span>
+  </a>
 
-  <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
-    const { motion } = window.Motion || {};
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation" data-aria-en="Primary navigation" data-aria-zh="主要導覽">
+      <a class="wordmark" href="/" aria-label="lekker.design home" data-aria-en="lekker.design home" data-aria-zh="返回 lekker.design 首頁">
+        <span class="wordmark-mark" aria-hidden="true">//</span>
+        <span>lekker.design</span>
+      </a>
 
-    // ---------- ICONS ----------
-    const Icon = ({ children, className = "w-4 h-4", stroke = 1.75 }) => (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round"
-           className={className}>{children}</svg>
-    );
-    const ArrowUpRight = (p) => <Icon {...p}><path d="M7 17L17 7M7 7h10v10"/></Icon>;
-    const Play = ({ className = "w-3 h-3" }) => (
-      <svg viewBox="0 0 24 24" fill="currentColor" className={className}><path d="M8 5v14l11-7z"/></svg>
-    );
-    const Zap      = (p) => <Icon {...p}><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></Icon>;
-    const Palette  = (p) => <Icon {...p}><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2a10 10 0 1 0 0 20 2 2 0 0 0 2-2 2 2 0 0 1 2-2h2a4 4 0 0 0 4-4 10 10 0 0 0-10-10z"/></Icon>;
-    const BarChart = (p) => <Icon {...p}><path d="M3 3v18h18"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-4"/></Icon>;
-    const Shield   = (p) => <Icon {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></Icon>;
-
-    // ---------- BLUR TEXT ----------
-    const BlurText = ({ text, className = "", delay = 100, splitBy = "words" }) => {
-      const ref = useRef(null);
-      const [visible, setVisible] = useState(false);
-      useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const io = new IntersectionObserver(
-          (entries) => { entries.forEach((e) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } }); },
-          { threshold: 0.1 }
-        );
-        io.observe(el);
-        return () => io.disconnect();
-      }, []);
-      const parts = splitBy === "words" ? text.split(" ") : text.split("");
-      return (
-        <span ref={ref} className={className}>
-          {parts.map((p, i) => (
-            <motion.span key={`w-${i}`}
-              style={{ display: "inline-block", marginRight: splitBy === "words" && i < parts.length - 1 ? "0.25em" : 0 }}
-              initial={{ filter: "blur(10px)", opacity: 0, y: 50 }}
-              animate={visible ? { filter: "blur(0px)", opacity: 1, y: 0 } : { filter: "blur(10px)", opacity: 0, y: 50 }}
-              transition={{ duration: 0.7, delay: (i * delay) / 1000, ease: [0.25, 0.1, 0.25, 1] }}
-            >{p}</motion.span>
-          ))}
-        </span>
-      );
-    };
-
-    // ---------- NAVBAR ----------
-    const Navbar = () => (
-      <nav className="fixed top-4 left-0 right-0 z-50 px-6 lg:px-12 py-3">
-        <div className="flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2.5">
-            <div className="liquid-glass h-11 w-11 rounded-full flex items-center justify-center">
-              <span className="font-heading italic text-white text-xl leading-none relative z-10">lk</span>
-            </div>
-            <span className="font-heading italic text-white text-xl hidden sm:block">lekker.design</span>
-          </a>
-          <div className="hidden md:flex liquid-glass rounded-full px-1.5 py-1 items-center">
-            {["Home", "Services", "Work", "Process", "Pricing"].map((l) => (
-              <a key={l} href={`#${l.toLowerCase()}`}
-                 className="px-3.5 py-2 text-[13px] font-medium text-white/85 hover:text-white font-body transition-colors">{l}</a>
-            ))}
-            <a href="mailto:hello@lekker.design"
-               className="ml-1 bg-white text-black rounded-full px-3.5 py-1.5 text-[13px] font-medium flex items-center gap-1 hover:bg-white/90 transition-colors">
-              Get Started <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
-          <a href="mailto:hello@lekker.design"
-             className="md:hidden bg-white text-black rounded-full px-4 py-2 text-sm font-medium flex items-center gap-1">
-            Start <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
-      </nav>
-    );
-
-    // ---------- HERO ----------
-    const Hero = () => {
-      const partners = ["Client 01", "Client 02", "Client 03", "Client 04", "Client 05"];
-      return (
-        <section className="relative overflow-hidden atmos-hero atmos-noise" style={{ minHeight: "100vh" }}>
-          <div className="atmos-glow-1" />
-          <div className="atmos-glow-2" />
-          <div className="absolute bottom-0 left-0 right-0 h-72 fade-bottom-black pointer-events-none z-[1]" />
-          <div className="relative z-10 flex flex-col items-center text-center px-6 pt-40 md:pt-44 pb-16">
-            <motion.div
-              initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="liquid-glass rounded-full px-1 py-1 flex items-center gap-2 mb-8"
-            >
-              <span className="bg-white text-black rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide uppercase">New</span>
-              <span className="pr-3 text-white/90 text-[13px] font-body">Introducing boutique web design.</span>
-            </motion.div>
-            <h1 className="font-heading italic text-white max-w-4xl leading-[0.85] tracking-[-0.04em] text-6xl md:text-7xl lg:text-[5.75rem]">
-              <BlurText text="The Website Your Brand Deserves" delay={90} />
-            </h1>
-            <motion.p
-              initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-8 max-w-xl text-white/75 font-body font-light text-[15px] md:text-base leading-snug"
-            >
-              Stunning design. Blazing performance. Crafted by designers who care.
-              Web design, wildly reimagined.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-              transition={{ duration: 0.6, delay: 1.1 }}
-              className="mt-9 flex items-center gap-5"
-            >
-              <a href="mailto:hello@lekker.design"
-                 className="liquid-glass-strong rounded-full px-5 py-2.5 text-white font-body text-sm flex items-center gap-1.5">
-                Get Started <ArrowUpRight className="w-4 h-4" />
-              </a>
-              <button className="text-white/90 font-body text-sm flex items-center gap-2 hover:text-white transition">
-                <span className="liquid-glass-strong rounded-full w-8 h-8 flex items-center justify-center">
-                  <Play className="w-3 h-3 text-white" />
-                </span>
-                Watch the film
-              </button>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.5 }}
-              className="mt-24 md:mt-28 flex flex-col items-center gap-8"
-            >
-              <div className="liquid-glass rounded-full px-4 py-1.5 text-[11px] font-body text-white/80 tracking-wide uppercase">
-                Trusted by teams worldwide
-              </div>
-              <div className="flex flex-wrap justify-center items-center gap-x-12 md:gap-x-16 gap-y-4">
-                {partners.map((p) => (
-                  <span key={p} className="font-heading italic text-white/85 text-2xl md:text-[1.75rem] whitespace-nowrap">{p}</span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      );
-    };
-
-    // ---------- HOW IT WORKS ----------
-    const StartSection = () => (
-      <section id="process" className="relative overflow-hidden atmos-start atmos-noise py-32 md:py-44">
-        <div className="absolute top-0 left-0 right-0 h-52 fade-top-black pointer-events-none z-[1]" />
-        <div className="absolute bottom-0 left-0 right-0 h-52 fade-bottom-black pointer-events-none z-[1]" />
-        <div className="absolute top-1/4 left-1/3 w-96 h-96 rounded-full pointer-events-none"
-             style={{ background: "hsl(var(--accent-hue) 60% 40% / 0.25)", filter: "blur(100px)" }} />
-        <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto">
-          <div className="liquid-glass rounded-full px-4 py-1 text-[11px] font-body text-white/90 tracking-wide uppercase mb-8">
-            How It Works
-          </div>
-          <h2 className="font-heading italic text-white tracking-tight leading-[0.9] text-5xl md:text-6xl lg:text-7xl">
-            <BlurText text="You dream it. We ship it." delay={110} />
-          </h2>
-          <p className="mt-8 max-w-xl text-white/60 font-body font-light text-[15px] md:text-base leading-snug">
-            Share your vision. We handle the rest — wireframes, design, code, launch.
-            All in days, not quarters.
-          </p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-10"
-          >
-            <a href="mailto:hello@lekker.design"
-               className="liquid-glass-strong rounded-full px-6 py-3 text-white font-body text-sm flex items-center gap-1.5">
-              Get Started <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </motion.div>
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
-            {[
-              { n: "01", t: "Describe", d: "Tell us about your business. Ten minutes on WhatsApp is enough." },
-              { n: "02", t: "Design",   d: "We design. You review. You approve before you pay." },
-              { n: "03", t: "Deploy",   d: "Launch in days. Tweaks anytime. No retainer, no lock‑in." },
-            ].map((s) => (
-              <div key={s.n} className="liquid-glass rounded-2xl p-6 text-left">
-                <div className="font-heading italic text-white/50 text-2xl">{s.n}</div>
-                <div className="font-heading italic text-white text-2xl mt-1">{s.t}</div>
-                <div className="mt-3 text-white/60 font-body font-light text-sm leading-snug">{s.d}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-
-    // ---------- CAPABILITIES ----------
-    const PreviewFrame = ({ label, variant = "a" }) => {
-      const bars = variant === "a" ? [62, 78, 45, 91, 58, 72] : [34, 48, 67, 52, 81, 44];
-      return (
-        <div className="preview-card aspect-[4/3] rounded-2xl relative">
-          <div className="absolute inset-0 p-6 flex flex-col">
-            <div className="flex items-center gap-1.5 mb-4">
-              <span className="w-2 h-2 rounded-full bg-white/30" />
-              <span className="w-2 h-2 rounded-full bg-white/30" />
-              <span className="w-2 h-2 rounded-full bg-white/30" />
-              <div className="ml-3 flex-1 h-4 rounded-sm bg-white/5 border border-white/10" />
-            </div>
-            {variant === "a" ? (
-              <div className="flex-1 flex gap-4">
-                <div className="flex-1 space-y-2">
-                  <div className="h-3 w-3/4 rounded-sm bg-white/20" />
-                  <div className="h-3 w-1/2 rounded-sm bg-white/12" />
-                  <div className="mt-4 h-20 rounded-lg bg-white/5 border border-white/10 flex items-end p-3 gap-1.5">
-                    {bars.map((h, i) => (
-                      <motion.div key={i} initial={{ height: "10%" }} whileInView={{ height: `${h}%` }}
-                        viewport={{ once: true }} transition={{ duration: 1.2, delay: i * 0.1, ease: "easeOut" }}
-                        className="flex-1 rounded-sm" style={{ background: "hsl(var(--accent-hue) var(--accent-sat) 70%)" }} />
-                    ))}
-                  </div>
-                  <div className="h-2 w-2/3 rounded-sm bg-white/10" />
-                  <div className="h-2 w-5/6 rounded-sm bg-white/10" />
-                </div>
-                <div className="w-1/3 space-y-2">
-                  <div className="h-8 rounded-md bg-white/10" />
-                  <div className="h-16 rounded-md bg-white/5 border border-white/10" />
-                  <div className="h-16 rounded-md bg-white/5 border border-white/10" />
-                </div>
-              </div>
-            ) : (
-              <div className="flex-1 grid grid-cols-3 gap-2">
-                {bars.map((v, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}
-                    className="rounded-md bg-white/5 border border-white/10 p-2 flex flex-col justify-between">
-                    <div className="h-1.5 w-1/2 rounded-sm bg-white/25" />
-                    <div>
-                      <div className="font-heading italic text-white text-xl leading-none">{v}%</div>
-                      <div className="h-1 mt-2 rounded-full overflow-hidden bg-white/10">
-                        <motion.div initial={{ width: 0 }} whileInView={{ width: `${v}%` }}
-                          viewport={{ once: true }} transition={{ duration: 1, delay: 0.3 + i * 0.08 }}
-                          className="h-full" style={{ background: "hsl(var(--accent-hue) var(--accent-sat) 70%)" }} />
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-            <div className="mt-3 text-[10px] font-mono text-white/30 uppercase tracking-widest">{label}</div>
-          </div>
-        </div>
-      );
-    };
-
-    const FeaturesChess = () => {
-      const rows = [
-        {
-          reverse: false,
-          title: "Designed to convert. Built to perform.",
-          body: "Every pixel is intentional. We study what works across the best sites in your industry — then build yours to outperform them all.",
-          cta: "Learn more",
-          preview: <PreviewFrame label="// hero.preview — conversion layout" variant="a" />,
-        },
-        {
-          reverse: true,
-          title: "It gets smarter. Automatically.",
-          body: "Your site is built to last. We monitor performance and handle updates so you never have to. No retainers, no lock‑in. Ever.",
-          cta: "See how it works",
-          preview: <PreviewFrame label="// telemetry.live — auto‑optimising" variant="b" />,
-        },
-      ];
-      return (
-        <section id="services" className="relative bg-black px-6 lg:px-12 py-28 md:py-36">
-          <div className="max-w-6xl mx-auto text-center mb-20">
-            <div className="inline-block liquid-glass rounded-full px-4 py-1 text-[11px] font-body text-white/90 tracking-wide uppercase mb-6">Capabilities</div>
-            <h2 className="font-heading italic text-white tracking-tight leading-[0.9] text-4xl md:text-5xl lg:text-6xl max-w-3xl mx-auto">
-              <BlurText text="Pro features. Zero complexity." delay={100} />
-            </h2>
-          </div>
-          <div className="max-w-6xl mx-auto space-y-24 md:space-y-32">
-            {rows.map((r, i) => (
-              <div key={i} className={`flex flex-col ${r.reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-10 md:gap-16`}>
-                <motion.div
-                  initial={{ opacity: 0, x: r.reverse ? 40 : -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="flex-1"
-                >
-                  <h3 className="font-heading italic text-white text-4xl md:text-5xl leading-[0.95] tracking-tight max-w-md">{r.title}</h3>
-                  <p className="mt-6 text-white/65 font-body font-light text-[15px] md:text-base leading-relaxed max-w-md">{r.body}</p>
-                  <button className="liquid-glass-strong rounded-full px-5 py-2.5 mt-8 text-white font-body text-sm flex items-center gap-1.5">
-                    {r.cta} <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="flex-1 w-full liquid-glass rounded-2xl p-2"
-                >
-                  {r.preview}
-                </motion.div>
-              </div>
-            ))}
-          </div>
-        </section>
-      );
-    };
-
-    // ---------- WHY US ----------
-    const WhyUs = () => {
-      const cards = [
-        { icon: <Zap className="w-4 h-4" />,      title: "Days, Not Months",    body: "Concept to launch at a pace that redefines fast. Because waiting isn't a strategy." },
-        { icon: <Palette className="w-4 h-4" />,  title: "Obsessively Crafted", body: "Every detail considered. Every element refined. Design so precise, it feels inevitable." },
-        { icon: <BarChart className="w-4 h-4" />, title: "Built to Convert",    body: "Layouts informed by data. Decisions backed by performance. Results you can measure." },
-        { icon: <Shield className="w-4 h-4" />,   title: "Secure by Default",   body: "Enterprise-grade protection comes standard. SSL, DDoS mitigation, compliance. All included." },
-      ];
-      return (
-        <section id="work" className="relative bg-black px-6 lg:px-12 py-28 md:py-36">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <div className="inline-block liquid-glass rounded-full px-4 py-1 text-[11px] font-body text-white/90 tracking-wide uppercase mb-6">Why Us</div>
-              <h2 className="font-heading italic text-white tracking-tight leading-[0.9] text-4xl md:text-5xl lg:text-6xl">
-                <BlurText text="The difference is everything." delay={100} />
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {cards.map((c, i) => (
-                <motion.div key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="liquid-glass rounded-2xl p-6"
-                >
-                  <div className="liquid-glass-strong rounded-full w-10 h-10 flex items-center justify-center text-white mb-4">{c.icon}</div>
-                  <div className="font-heading italic text-white text-xl mb-2">{c.title}</div>
-                  <div className="text-white/60 font-body font-light text-sm leading-snug">{c.body}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      );
-    };
-
-    // ---------- STATS ----------
-    const Stats = () => {
-      const stats = [
-        { value: "200+",   label: "Sites launched" },
-        { value: "98%",    label: "Client satisfaction" },
-        { value: "3.2x",   label: "More conversions" },
-        { value: "5 days", label: "Average delivery" },
-      ];
-      return (
-        <section className="relative overflow-hidden atmos-noise py-28 md:py-36 bg-black">
-          <div className="absolute inset-0"
-               style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, hsl(var(--accent-hue) var(--accent-sat) 30% / 0.35), transparent 70%)" }} />
-          <div className="absolute top-0 left-0 right-0 h-52 fade-top-black pointer-events-none z-[1]" />
-          <div className="absolute bottom-0 left-0 right-0 h-52 fade-bottom-black pointer-events-none z-[1]" />
-          <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
-            <div className="liquid-glass rounded-3xl p-12 md:p-16">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-                {stats.map((s, i) => (
-                  <motion.div key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.6, delay: i * 0.1 }}
-                  >
-                    <div className="font-heading italic text-white text-4xl md:text-5xl lg:text-6xl leading-none">{s.value}</div>
-                    <div className="mt-2 text-white/60 font-body font-light text-sm">{s.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      );
-    };
-
-    // ---------- TESTIMONIALS ----------
-    const Testimonials = () => {
-      const items = [
-        { quote: "They delivered a site that looked better than anything we'd imagined. Fast, beautiful, and exactly on-brand.", name: "Sarah Chen",  role: "Founder, Luminary" },
-        { quote: "From first call to launch in four days. The quality blew our whole team away. We keep getting compliments.",  name: "Marcus Webb", role: "CEO, Arcline" },
-        { quote: "We'd been putting off a redesign for two years. Lekker made it effortless. Worth every penny.",               name: "Elena Voss",  role: "Director, Helix" },
-      ];
-      return (
-        <section className="relative bg-black px-6 lg:px-12 py-28 md:py-36">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <div className="inline-block liquid-glass rounded-full px-4 py-1 text-[11px] font-body text-white/90 tracking-wide uppercase mb-6">What They Say</div>
-              <h2 className="font-heading italic text-white tracking-tight leading-[0.9] text-4xl md:text-5xl lg:text-6xl">
-                <BlurText text="Don't take our word for it." delay={100} />
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {items.map((t, i) => (
-                <motion.div key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.6, delay: i * 0.12 }}
-                  className="liquid-glass rounded-2xl p-8 flex flex-col gap-6"
-                >
-                  <p className="text-white/80 font-body font-light text-sm italic leading-relaxed flex-1">"{t.quote}"</p>
-                  <div>
-                    <div className="text-white font-body font-medium text-sm">{t.name}</div>
-                    <div className="text-white/50 font-body font-light text-xs mt-0.5">{t.role}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      );
-    };
-
-    // ---------- CTA + FOOTER ----------
-    const CTAFooter = () => (
-      <section className="relative overflow-hidden atmos-noise">
-        <div className="absolute inset-0"
-             style={{ background: "radial-gradient(ellipse 100% 80% at 50% 80%, hsl(var(--accent-hue) var(--accent-sat) 30% / 0.4), transparent 70%)" }} />
-        <div className="absolute top-0 left-0 right-0 h-52 fade-top-black pointer-events-none z-[1]" />
-        <div className="relative z-10 px-6 lg:px-12 pt-32 pb-0 text-center max-w-5xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-            whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-            className="font-heading italic text-white leading-[0.85] tracking-[-0.03em] text-5xl md:text-6xl lg:text-7xl"
-          >
-            Your next website starts here.
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-6 text-white/60 font-body font-light text-[15px] md:text-base max-w-lg mx-auto"
-          >
-            Let's build something you're proud to show off. No agencies, no fluff — just great design, fast.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-10 flex items-center justify-center gap-4 flex-wrap"
-          >
-            <a href="mailto:hello@lekker.design"
-               className="liquid-glass-strong rounded-full px-6 py-3 text-white font-body text-sm flex items-center gap-1.5">
-              Book a Call <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <a href="#pricing"
-               className="bg-white text-black rounded-full px-6 py-3 font-body text-sm font-medium hover:bg-white/90 transition">
-              View Pricing
-            </a>
-          </motion.div>
-        </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 mt-32 pt-8 border-t border-white/10 pb-10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-xs font-body">© 2026 lekker.design. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            {[["Privacy", "#privacy"], ["Terms", "#terms"], ["Contact", "mailto:hello@lekker.design"]].map(([l, h]) => (
-              <a key={l} href={h} className="text-white/40 text-xs font-body hover:text-white/70 transition">{l}</a>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-
-    // ---------- APP ----------
-    const App = () => (
-      <div className="relative bg-black text-white min-h-screen font-body">
-        <Navbar />
-        <Hero />
-        <StartSection />
-        <FeaturesChess />
-        <WhyUs />
-        <Stats />
-        <Testimonials />
-        <CTAFooter />
+      <div class="desktop-nav">
+        <a href="/portfolio"><span data-en>Work</span><span data-zh>作品</span></a>
+        <a href="#disciplines"><span data-en>Disciplines</span><span data-zh>設計領域</span></a>
+        <a href="#process"><span data-en>Process</span><span data-zh>流程</span></a>
+        <a href="mailto:hello@lekker.design"><span data-en>Start a project</span><span data-zh>開始合作</span></a>
       </div>
-    );
 
-    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-  </script>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to Traditional Chinese">中文</button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="mobileNav" aria-expanded="false">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" data-aria-en="Mobile navigation" data-aria-zh="流動裝置導覽" hidden>
+    <a href="/portfolio"><span data-en>Work</span><span data-zh>作品</span><span aria-hidden="true">↗</span></a>
+    <a href="#disciplines"><span data-en>Disciplines</span><span data-zh>設計領域</span><span aria-hidden="true">↓</span></a>
+    <a href="#process"><span data-en>Process</span><span data-zh>流程</span><span aria-hidden="true">↓</span></a>
+    <a href="mailto:hello@lekker.design"><span data-en>Start a project</span><span data-zh>開始合作</span><span aria-hidden="true">↗</span></a>
+  </nav>
+
+  <main class="home-main" id="main">
+    <section class="home-hero shell" aria-labelledby="home-hero-title">
+      <h1 class="home-hero-title" id="home-hero-title">
+        <span data-en>
+          <span class="home-hero-line">Different brief.</span>
+          <span class="home-hero-line">Different website<span class="accent">.</span></span>
+        </span>
+        <span data-zh>
+          <span class="home-hero-line">不同需求。</span>
+          <span class="home-hero-line">不同網站<span class="accent">。</span></span>
+        </span>
+      </h1>
+
+      <div class="home-hero-intro">
+        <p>
+          <span data-en>Lekker builds commerce, publications, portfolios, and digital products, each with its own visual logic.</span>
+          <span data-zh>Lekker 打造電商、內容刊物、作品集及數碼產品，每個項目都有自己的視覺邏輯。</span>
+        </p>
+        <div class="home-hero-actions">
+          <a class="button button-dark" href="/portfolio"><span data-en>View the work</span><span data-zh>瀏覽作品</span></a>
+          <a class="button button-light button-arrow" href="mailto:hello@lekker.design"><span data-en>Start a project</span><span data-zh>開始合作</span></a>
+        </div>
+      </div>
+
+      <div class="home-stage" role="group" aria-label="Two live Lekker projects" data-aria-en="Two live Lekker projects" data-aria-zh="兩個 Lekker 現有項目">
+        <figure class="home-stage-project">
+          <a href="https://asset.lekker.design" target="_blank" rel="noopener noreferrer" aria-label="Open Asset Screener" data-aria-en="Open Asset Screener" data-aria-zh="開啟 Asset Screener">
+            <img src="assets/projects/asset-screener.jpg" width="1440" height="960" fetchpriority="high" alt="Asset Screener market intelligence dashboard" data-alt-en="Asset Screener market intelligence dashboard" data-alt-zh="Asset Screener 市場情報儀表板">
+          </a>
+          <figcaption><strong>Asset Screener</strong><span data-en>Market intelligence product</span><span data-zh>市場情報產品</span></figcaption>
+        </figure>
+        <figure class="home-stage-project">
+          <a href="https://maisonmasque.com" target="_blank" rel="noopener noreferrer" aria-label="Open Maison Masque" data-aria-en="Open Maison Masque" data-aria-zh="開啟 Maison Masque">
+            <img src="assets/projects/maison-masque.jpg" width="1440" height="960" fetchpriority="high" alt="Maison Masque Korean skincare store" data-alt-en="Maison Masque Korean skincare store" data-alt-zh="Maison Masque 韓國護膚品商店">
+          </a>
+          <figcaption><strong>Maison Masque</strong><span data-en>Global skincare commerce</span><span data-zh>全球護膚品電商</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="home-section shell" aria-labelledby="live-work-title">
+      <header class="home-section-heading" data-reveal>
+        <h2 id="live-work-title"><span data-en>Three live builds. Three different jobs.</span><span data-zh>三個現有項目。三種不同任務。</span></h2>
+        <p><span data-en>The artifact leads. The studio claim comes after.</span><span data-zh>先看實際作品，再談工作室本身。</span></p>
+      </header>
+
+      <div class="home-work-grid">
+        <figure class="home-work-card home-work-card-primary" data-reveal>
+          <a href="https://jf.lekker.design" target="_blank" rel="noopener noreferrer" aria-label="Open Jacques Fuller" data-aria-en="Open Jacques Fuller" data-aria-zh="開啟 Jacques Fuller">
+            <img src="assets/projects/jacques-fuller.jpg" width="1440" height="960" loading="lazy" alt="Jacques Fuller sculpture portfolio" data-alt-en="Jacques Fuller sculpture portfolio" data-alt-zh="Jacques Fuller 雕塑作品集">
+          </a>
+          <figcaption><strong>Jacques Fuller</strong><span data-en>Artist portfolio</span><span data-zh>藝術家作品集</span></figcaption>
+        </figure>
+
+        <div class="home-work-stack">
+          <figure class="home-work-card" data-reveal>
+            <a href="https://babygearbrief.com" target="_blank" rel="noopener noreferrer" aria-label="Open Baby Gear Brief" data-aria-en="Open Baby Gear Brief" data-aria-zh="開啟 Baby Gear Brief">
+              <img src="assets/projects/baby-gear-brief.jpg" width="1440" height="960" loading="lazy" alt="Baby Gear Brief baby gear publication" data-alt-en="Baby Gear Brief baby gear publication" data-alt-zh="Baby Gear Brief 嬰兒用品內容刊物">
+            </a>
+            <figcaption><strong>Baby Gear Brief</strong><span data-en>Editorial publication</span><span data-zh>內容刊物</span></figcaption>
+          </figure>
+          <figure class="home-work-card" data-reveal>
+            <a href="https://gpu-hosting.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open GPU Hosting Guide" data-aria-en="Open GPU Hosting Guide" data-aria-zh="開啟 GPU Hosting Guide">
+              <img src="assets/projects/gpu-hosting.jpg" width="1440" height="960" loading="lazy" alt="GPU Hosting Guide technical buyer guide" data-alt-en="GPU Hosting Guide technical buyer guide" data-alt-zh="GPU Hosting Guide 技術採購指南">
+            </a>
+            <figcaption><strong>GPU Hosting Guide</strong><span data-en>Technical buyer guide</span><span data-zh>技術採購指南</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="home-work-footer" data-reveal>
+        <a class="button button-light button-arrow" href="/portfolio"><span data-en>View the work</span><span data-zh>瀏覽作品</span></a>
+      </div>
+    </section>
+
+    <section class="home-section home-disciplines" id="disciplines" aria-labelledby="disciplines-title">
+      <div class="shell home-discipline-layout">
+        <div class="home-discipline-intro" data-reveal>
+          <h2 id="disciplines-title"><span data-en>Not one house style.</span><span data-zh>不只一種固定風格。</span></h2>
+          <p><span data-en>The visual system follows the job, the audience, and the proof each site needs.</span><span data-zh>視覺系統跟隨任務、受眾，以及每個網站所需的證據。</span></p>
+        </div>
+
+        <ul class="home-discipline-list" data-reveal>
+          <li class="home-discipline">
+            <h3><span data-en>Commerce</span><span data-zh>電商</span></h3>
+            <p><span data-en>Product worlds that connect discovery, trust, and purchase without flattening the brand.</span><span data-zh>連結產品探索、信任及購買，同時保留品牌個性的產品世界。</span></p>
+            <a href="/portfolio?filter=commerce#archive"><span data-en>View work</span><span data-zh>瀏覽作品</span></a>
+          </li>
+          <li class="home-discipline">
+            <h3><span data-en>Publications</span><span data-zh>內容刊物</span></h3>
+            <p><span data-en>Editorial systems that help readers compare evidence and act with confidence.</span><span data-zh>協助讀者比較證據並有信心作出行動的內容系統。</span></p>
+            <a href="/portfolio?filter=editorial#archive"><span data-en>View work</span><span data-zh>瀏覽作品</span></a>
+          </li>
+          <li class="home-discipline">
+            <h3><span data-en>Products</span><span data-zh>數碼產品</span></h3>
+            <p><span data-en>Useful interfaces that make complex information easier to scan, understand, and use.</span><span data-zh>讓複雜資訊更容易瀏覽、理解及使用的實用介面。</span></p>
+            <a href="/portfolio?filter=product#archive"><span data-en>View work</span><span data-zh>瀏覽作品</span></a>
+          </li>
+          <li class="home-discipline">
+            <h3><span data-en>Portfolios</span><span data-zh>作品集</span></h3>
+            <p><span data-en>Focused viewing rooms that keep the artist, object, or practice in control.</span><span data-zh>讓藝術家、作品或創作實踐保持主導的專注觀看空間。</span></p>
+            <a href="/portfolio?filter=portfolio#archive"><span data-en>View work</span><span data-zh>瀏覽作品</span></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="home-section shell" id="process" aria-labelledby="process-title">
+      <header class="home-process-heading" data-reveal>
+        <h2 id="process-title"><span data-en>A clear path from brief to build.</span><span data-zh>由需求到成品，路徑清晰。</span></h2>
+        <p><span data-en>Enough structure to stay aligned. Enough room to make the work specific.</span><span data-zh>有足夠結構保持方向一致，也有足夠空間做出真正具體的作品。</span></p>
+      </header>
+
+      <div class="home-process-steps" data-reveal>
+        <article class="home-process-step">
+          <h3><span data-en>Frame</span><span data-zh>釐清</span></h3>
+          <p><span data-en>Define what the site must do, who it serves, and what proof it needs.</span><span data-zh>定義網站需要完成甚麼、服務誰，以及需要哪些證據。</span></p>
+        </article>
+        <article class="home-process-step">
+          <h3><span data-en>Make</span><span data-zh>製作</span></h3>
+          <p><span data-en>Build the visual system, content hierarchy, responsive layouts, and working interactions.</span><span data-zh>建立視覺系統、內容層次、響應式版面及可用互動。</span></p>
+        </article>
+        <article class="home-process-step">
+          <h3><span data-en>Refine</span><span data-zh>完善</span></h3>
+          <p><span data-en>Test the real page across devices, fix what breaks, and prepare it for launch.</span><span data-zh>在不同裝置測試真實頁面，修正問題，並為上線做好準備。</span></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section home-archive shell" aria-labelledby="archive-preview-title">
+      <header class="home-archive-heading" data-reveal>
+        <h2 id="archive-preview-title"><span data-en>Sixteen builds. No flattened house style.</span><span data-zh>十六個項目。沒有被單一風格抹平。</span></h2>
+        <p><span data-en>Live products and concept studies stay clearly labeled in the full archive.</span><span data-zh>完整作品庫清楚標示現有產品及概念研究。</span></p>
+        <a class="button button-dark" href="/portfolio"><span data-en>View the work</span><span data-zh>瀏覽作品</span></a>
+      </header>
+
+      <div class="home-archive-spread" data-reveal>
+        <figure class="home-archive-item">
+          <a href="https://blankteeguide.com" target="_blank" rel="noopener noreferrer" aria-label="Open Blank Tee Guide" data-aria-en="Open Blank Tee Guide" data-aria-zh="開啟 Blank Tee Guide">
+            <img src="assets/projects/blank-tee-guide.jpg" width="1440" height="960" loading="lazy" alt="Blank Tee Guide apparel publication" data-alt-en="Blank Tee Guide apparel publication" data-alt-zh="Blank Tee Guide 服裝內容刊物">
+          </a>
+          <figcaption><strong>Blank Tee Guide</strong><span data-en>Live</span><span data-zh>已上線</span></figcaption>
+        </figure>
+        <figure class="home-archive-item">
+          <a href="https://glowingredients.com" target="_blank" rel="noopener noreferrer" aria-label="Open Glow Ingredients" data-aria-en="Open Glow Ingredients" data-aria-zh="開啟 Glow Ingredients">
+            <img src="assets/projects/glow-ingredients.jpg" width="1440" height="960" loading="lazy" alt="Glow Ingredients skincare publication" data-alt-en="Glow Ingredients skincare publication" data-alt-zh="Glow Ingredients 護膚內容刊物">
+          </a>
+          <figcaption><strong>Glow Ingredients</strong><span data-en>Live</span><span data-zh>已上線</span></figcaption>
+        </figure>
+        <figure class="home-archive-item">
+          <a href="https://besttintedsunscreen.com" target="_blank" rel="noopener noreferrer" aria-label="Open Best Tinted Sunscreen" data-aria-en="Open Best Tinted Sunscreen" data-aria-zh="開啟 Best Tinted Sunscreen">
+            <img src="assets/projects/best-tinted-sunscreen.jpg" width="1440" height="960" loading="lazy" alt="Best Tinted Sunscreen editorial guide" data-alt-en="Best Tinted Sunscreen editorial guide" data-alt-zh="Best Tinted Sunscreen 編輯指南">
+          </a>
+          <figcaption><strong>Best Tinted Sunscreen</strong><span data-en>Live</span><span data-zh>已上線</span></figcaption>
+        </figure>
+        <figure class="home-archive-item">
+          <a href="https://yoga-kohl-six.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Breathe Studio concept" data-aria-en="Open Breathe Studio concept" data-aria-zh="開啟 Breathe Studio 概念">
+            <img src="assets/projects/breathe-studio-concept.jpg" width="1440" height="960" loading="lazy" alt="Breathe yoga studio concept" data-alt-en="Breathe yoga studio concept" data-alt-zh="Breathe 瑜伽工作室概念">
+          </a>
+          <figcaption><strong>Breathe Studio</strong><span data-en>Concept study</span><span data-zh>概念研究</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="cta" id="contact" aria-labelledby="contact-title">
+      <div class="cta-inner shell">
+        <div data-reveal>
+          <h2 id="contact-title"><span data-en>Have a site that should exist?</span><span data-zh>有一個值得存在的網站嗎？</span></h2>
+          <p><span data-en>Tell us what it needs to do. We will work out what it should become.</span><span data-zh>告訴我們它需要完成甚麼。我們會一起找出它應該成為甚麼。</span></p>
+        </div>
+        <a class="button button-dark button-arrow" href="mailto:hello@lekker.design"><span data-en>Start a project</span><span data-zh>開始合作</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner shell">
+      <a class="wordmark" href="/" aria-label="lekker.design home" data-aria-en="lekker.design home" data-aria-zh="返回 lekker.design 首頁">
+        <span class="wordmark-mark" aria-hidden="true">//</span><span>lekker.design</span>
+      </a>
+      <p><span data-en>Independent web design for products, publications, commerce, and portfolios.</span><span data-zh>為產品、內容刊物、電商及作品集提供獨立網頁設計。</span></p>
+      <p class="footer-meta"><span data-en>Hong Kong</span><span data-zh>香港</span><br>© <span id="year">2026</span></p>
+    </div>
+  </footer>
 </body>
 </html>

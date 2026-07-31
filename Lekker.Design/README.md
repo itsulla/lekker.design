@@ -1,29 +1,30 @@
-# Lekker Design — Portfolio Website
+# Lekker Design Portfolio
 
-Static portfolio site for Lekker Design, a web design studio based in Cape Town.
+Static multi-page website for Lekker Design. The homepage and portfolio lead with real project evidence, while the archive separates live work from explicitly labeled concept studies.
 
 ## Stack
 
-- **HTML** — Two self-contained pages, all CSS/JS inline
-- **Fonts** — Space Grotesk + Space Mono via Google Fonts CDN
-- **Animations** — AOS (Animate On Scroll) via unpkg CDN
-- **Hosting** — Vercel (static)
+- **Pages:** semantic HTML, standalone CSS, and vanilla JavaScript
+- **Font:** self-hosted Bricolage Grotesque with system fallbacks
+- **Shared system:** `portfolio.css` provides tokens, navigation, controls, language visibility, motion fallbacks, CTA, and footer styles
+- **Homepage extension:** `home.css` and `home.js` provide the Proof Collision layout and page-specific behavior
+- **Hosting:** static Vercel deployment with clean URLs
 
 ## Pages
 
 | File | Route | Description |
 |------|-------|-------------|
-| `index.html` | `/` | Main pitch — hero, about, services, process, contact |
-| `portfolio.html` | `/portfolio` | Selected work — project grid, before/after, CTA |
+| `index.html` | `/` | Proof-first studio homepage, live-work field, disciplines, process, archive preview, and contact CTA |
+| `portfolio.html` | `/portfolio` | Selected work, approach, filterable archive, and contact CTA |
+
+The portfolio catalog is maintained in `portfolio.js`. Its current split is 16 projects: 8 live builds and 8 concept studies, with 6 selected projects.
 
 ## Local Development
 
-Open `index.html` in a browser. No build step required.
-
-For Vercel-style clean URLs locally, use any static server:
+No build step is required. From this directory, run a static server:
 
 ```bash
-npx serve .
+python3 -m http.server 8128
 ```
 
 ## Deploy
@@ -34,8 +35,10 @@ npx vercel --prod
 
 Or connect the repo to Vercel and it auto-deploys on push.
 
-## Design
+## Product and design documentation
 
-- **Style:** Brutalist / editorial
-- **Palette:** Near-black (#0a0a0a), off-white (#f0f0f0), vermillion accent (#ff3c00)
-- **Typography:** Space Grotesk (display), Space Mono (body/mono)
+- `../PRODUCT.md` records the portfolio's product purpose and content rules.
+- `../DESIGN.md` records the shipped visual tokens, component families, responsive behavior, motion, and accessibility expectations.
+- `../.impeccable/design.json` is the machine-readable design sidecar.
+
+Treat `index.html`, `home.css`, `home.js`, `portfolio.html`, `portfolio.css`, and `portfolio.js` as implementation truth. The portfolio catalog remains canonical in `portfolio.js`; homepage proof is an intentionally smaller static edit. Do not add client relationships, outcomes, awards, testimonials, dates, or performance claims without evidence.
